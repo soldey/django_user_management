@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users'
+    'users',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ],
         },
     },
@@ -131,3 +134,11 @@ LOGOUT_REDIRECT_URL = "dashboard"
 
 EMAIL_HOST = "localhost"
 EMAIL_PORT = 1025
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.github.GithubOAuth2'
+]
+
+SOCIAL_AUTH_GITHUB_KEY = 'ec9f53299b98bd0203f9'
+SOCIAL_AUTH_GITHUB_SECRET = '1cca2f122fca7e10309c884d607566bb32161097'
